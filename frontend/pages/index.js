@@ -39,15 +39,16 @@ export default function HomeScreen() {
               router.push("/auth-page-ssr");
             })
             .catch((error) => {
-              console.log(error)
+              console.log(error);
               alert("Usuário ou a senha estão inválidos");
             });
         }}
       >
         <input
+          type="text"
           placeholder="Usuário"
           name="usuario"
-          defaultValue="omariosouto"
+          // defaultValue="omariosouto"
           value={values.usuario}
           onChange={handleChange}
         />
@@ -55,7 +56,7 @@ export default function HomeScreen() {
           placeholder="Senha"
           name="senha"
           type="password"
-          defaultValue="safepassword"
+          // defaultValue="safepassword"
           value={values.senha}
           onChange={handleChange}
         />
