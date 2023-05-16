@@ -1,6 +1,4 @@
-import { redirect } from "next/dist/server/api-utils";
-import { authServices } from "../src/services/auth/authService";
-import { tokenService } from "../src/services/auth/tokenService";
+import withSession from "../src/services/auth/session";
 
 function AuthPageSSR(props) {
   return (
@@ -14,29 +12,6 @@ function AuthPageSSR(props) {
 export default AuthPageSSR;
 
 //Decorator Patter
-function withSession(funcao) {
-  return async (ctx) => {
-    try {
-      const session = await authServices.getSession(ctx);
-      const modifiedContext = {
-        ...ctx,
-        req: {
-          ...ctx.req,
-          session,
-        },
-      };
-      return funcao(modifiedContext);
-    } catch (err) {
-      return {
-        redirect: {
-          permanent: false,
-          destination: "/?error=401",
-        },
-      };
-    }
-  };
-}
-
 export const getServerSideProps = withSession((ctx) => {
   return {
     props: {
