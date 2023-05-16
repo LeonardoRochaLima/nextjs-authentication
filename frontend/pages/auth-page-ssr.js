@@ -22,12 +22,9 @@ function withSession(funcao) {
         ...ctx,
         req: {
           ...ctx.req,
-          session: {
-            name: "Nome do usuário",
-          },
+          session,
         },
       };
-      console.log(ctx);
       return funcao(modifiedContext);
     } catch (err) {
       return {
